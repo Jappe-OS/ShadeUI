@@ -29,6 +29,8 @@ flutter:
     - family: Inter
       fonts:
         - asset: resources/fonts/Inter/Inter-Italic-VariableFont_opsz,wght.ttf
+          style: italic
+        - asset: resources/fonts/Inter/Inter-VariableFont_opsz,wght.ttf
     - family: Nunito
       fonts:
         - asset: resources/fonts/Nunito/Nunito-ExtraLight.ttf

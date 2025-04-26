@@ -38,13 +38,13 @@ enum _ShadeContainerBackgroundType {
 class ShadeContainer extends StatefulWidget {
   /// Contructs a solid container without any transparency. The default color is [Theme.of(context).colorScheme.surface].
   factory ShadeContainer.solid({Widget? child, double? width, double? height, EdgeInsets? padding, Color? backgroundColor, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
-    final newBackgroundColor = backgroundColor?.withOpacity(1); 
+    final newBackgroundColor = backgroundColor?.withValues(alpha: 1);
     return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundType: _ShadeContainerBackgroundType.solid, border: border, borderRadius: borderRadius, shadows: shadows, child: child);
   }
 
   /// Contructs a transparent container, optionally with blur. The default color is [Theme.of(context).colorScheme.surface.transparentVersion()].
   factory ShadeContainer.transparent({Widget? child, double? width, double? height, EdgeInsets? padding, Color? backgroundColor, bool backgroundBlur = false, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
-    final newBackgroundColor = backgroundColor?.transparentVersion(); 
+    final newBackgroundColor = backgroundColor?.transparentVersion();
     return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundBlur: backgroundBlur, backgroundType: _ShadeContainerBackgroundType.transparent, border: border, borderRadius: borderRadius, shadows: shadows, child: child);
   }
 
@@ -91,7 +91,7 @@ class _AdvancedContainerState extends State<ShadeContainer> {
       ));
     }
 
-    final outerBorderColor = Colors.black.withOpacity(0.7);
+    final outerBorderColor = Colors.black.withValues(alpha: 0.7);
     final innerBorderColor = Theme.of(context).colorScheme.onInverseSurface.blend(Colors.white, 0.3);
 
     // The container widget.

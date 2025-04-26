@@ -152,7 +152,7 @@ class _ShadeHeaderBarState extends State<ShadeHeaderBar> {
 
     final defaultBorder = BorderSide(
       strokeAlign: -1,
-      color: light ? Colors.black.withOpacity(0.1) : Colors.white.withOpacity(0.06),
+      color: light ? Colors.black.withValues(alpha: 0.1) : Colors.white.withValues(alpha: 0.06),
     );
     final border = Border(bottom: widget.backgroundColor == Colors.transparent ? BorderSide.none : defaultBorder);
     //final shape = border + (const Border());
@@ -292,7 +292,7 @@ class _ShadeHeaderBarState extends State<ShadeHeaderBar> {
   }
 }
 
-class _ShadeWindowControl extends StatefulWidget {
+class _ShadeWindowControl extends StatelessWidget {
   final Color foregroundColor;
   final IconData icon;
   final Function()? onTap;
@@ -303,11 +303,6 @@ class _ShadeWindowControl extends StatefulWidget {
     required this.onTap,
   });
 
-  @override
-  _ShadeWindowControlState createState() => _ShadeWindowControlState();
-}
-
-class _ShadeWindowControlState extends State<_ShadeWindowControl> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -320,18 +315,18 @@ class _ShadeWindowControlState extends State<_ShadeWindowControl> {
             color: Colors.transparent,
             child: InkWell(
               hoverColor: Colors.transparent,
-              mouseCursor: SystemMouseCursors.alias,
+              mouseCursor: SystemMouseCursors.basic,
               borderRadius: BorderRadius.circular(30),
-              onTap: widget.onTap,
+              onTap: onTap,
               child: Center(
                 child: Container(
                   width: 25,
                   height: 25,
                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(30), color: Theme.of(context).colorScheme.onInverseSurface),
                   child: Icon(
-                    widget.icon,
+                    icon,
                     size: 13,
-                    color: widget.foregroundColor,
+                    color: foregroundColor,
                   ),
                 ),
               ),

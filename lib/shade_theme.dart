@@ -189,7 +189,7 @@ class ShadeTheme {
       ),
 
       // Text Input
-    
+
       inputDecorationTheme: inputDecorationTheme,
 
       dropdownMenuTheme: DropdownMenuThemeData(
@@ -287,7 +287,7 @@ class ShadeTheme {
           size: kCompactIconSize,
         ),
         unselectedIconTheme: IconThemeData(
-          color: colorScheme.onSurface.withOpacity(0.8),
+          color: colorScheme.onSurface.withValues(alpha: 0.8),
           size: kCompactIconSize,
         ),
       ),

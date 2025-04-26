@@ -51,7 +51,7 @@ class _ShadeSelectionBorderState extends State<ShadeSelectionBorder> {
     } else if (widget.isHighlighted) {
       borderColor = Theme.of(context).colorScheme.secondary;
     } else {
-      borderColor = Theme.of(context).colorScheme.onSurface.withOpacity(0.5);
+      borderColor = Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5);
     }
 
     return AnimatedContainer(

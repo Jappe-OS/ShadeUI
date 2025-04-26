@@ -81,15 +81,15 @@ class ShadeUIColors {
 extension ShadeUIColorExtension on Color {
   /// Get a transparent version of this color for use with blurred semi-transparent surfaces.
   Color transparentVersion() {
-    return withOpacity(kTransparentVerOp);
+    return withValues(alpha: kTransparentVerOp);
   }
 
   /// Blend this color with the [other] color with the specified [amount].
   Color blend(Color other, double amount) {
-    int blendedRed = (red + (other.red - red) * amount).round();
-    int blendedGreen = (green + (other.green - green) * amount).round();
-    int blendedBlue = (blue + (other.blue - blue) * amount).round();
-    int blendedAlpha = (alpha + (other.alpha - alpha) * amount).round();
+    int blendedRed = (r + (other.r - r) * amount).round();
+    int blendedGreen = (g + (other.g - g) * amount).round();
+    int blendedBlue = (b + (other.b - b) * amount).round();
+    int blendedAlpha = (a + (other.a - a) * amount).round();
 
     return Color.fromARGB(blendedAlpha, blendedRed, blendedGreen, blendedBlue);
   }
@@ -122,7 +122,7 @@ extension ShadeUIColorExtension on Color {
     }
 
     return hslColor
-        .withAlpha(scale(opacity, alpha))
+        .withAlpha(scale(a, alpha))
         .withHue(scale(hslColor.hue, hue, 360.0))
         .withSaturation(scale(hslColor.saturation, saturation))
         .withLightness(scale(hslColor.lightness, lightness))
@@ -236,10 +236,13 @@ extension ShadeUIColorExtension on Color {
 
   /// Returns a hex representation (`#AARRGGBB`) of the color.
   String toHex() {
-    return '#${alpha.toHex()}${red.toHex()}${green.toHex()}${blue.toHex()}';
+    return '#${a.toHex()}${r.toHex()}${g.toHex()}${b.toHex()}';
   }
 }
 
-extension on int {
-  String toHex() => toRadixString(16).padLeft(2, '0');
+extension on double {
+  String toHex() {
+    int value = (clamp(0.0, 1.0) * 255).round();
+    return value.toRadixString(16).padLeft(2, '0').toUpperCase();
+  }
 }

@@ -16,6 +16,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:provider/single_child_widget.dart';
 
 import '../shade_custom_theme_properties.dart';
 import '../shade_theme.dart';
@@ -35,6 +36,7 @@ import '../shade_theme.dart';
 /// change/listen to theme properties in runtime.
 class ShadeApp extends StatelessWidget {
   final ShadeCustomThemeProperties? customThemeProperties;
+  final List<SingleChildWidget> providers;
   final GlobalKey<NavigatorState>? navigatorKey;
   final GlobalKey<ScaffoldMessengerState>? scaffoldMessengerKey;
   final Widget? home;
@@ -69,6 +71,7 @@ class ShadeApp extends StatelessWidget {
   const ShadeApp(
       {Key? key,
       this.customThemeProperties,
+      this.providers = const [],
       this.navigatorKey,
       this.scaffoldMessengerKey,
       this.home,
@@ -103,8 +106,11 @@ class ShadeApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (_) => customThemeProperties ?? ShadeCustomThemeProperties.setDefault(),
+    return MultiProvider(
+        providers: [
+          Provider<ShadeCustomThemeProperties>(create: (_) => customThemeProperties ?? ShadeCustomThemeProperties.setDefault()),
+          ...providers,
+        ],
         builder: (context, child) {
           var themeProvider = Provider.of<ShadeCustomThemeProperties>(context);
           return MaterialApp(
@@ -142,6 +148,7 @@ class ShadeApp extends StatelessWidget {
             restorationScopeId: restorationScopeId,
             scrollBehavior: scrollBehavior,
           );
-        });
+        },
+    );
   }
 }

@@ -1,11 +1,5 @@
 # Shade UI
-A UI system used by JappeOS apps. Works alongside with material widgets.
-
-## Migrate from 1.0
-Here's a short tutorial on migrating from the old 1.0 version to this new version (2.x).
-
-1. Replace all Shade- widgets with material widgets. A button would have the `text` param, but on a material button, it would not be a named parameter, so remove `text:`, and you're done! Also, you may need to replace `onPress` with `onPressed` on several widgets. After that, there should not be a lot to do to use this version.
-2. Replace all `MaterialApp`'s with `ShadeApp`, and remove `theme` and `darkTheme` parameters (if present). However, you can customize the theme using the `customThemeProperties` parameter.
+A UI system used by JappeOS apps. Works alongside material widgets.
 
 ## How to use
 Want to use ShadeUI in your Flutter project? Here's how.

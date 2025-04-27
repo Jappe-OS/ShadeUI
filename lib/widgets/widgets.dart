@@ -23,4 +23,5 @@ export 'shade_container.dart';
 export 'shade_editable_text_widget.dart';
 export 'shade_header_bar.dart';
 export 'shade_selection_border.dart';
+export 'shade_sidebar_layout.dart';
 export 'shade_spaced_widgets.dart';

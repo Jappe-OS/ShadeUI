@@ -85,13 +85,13 @@ extension ShadeUIColorExtension on Color {
   }
 
   /// Blend this color with the [other] color with the specified [amount].
+  /// Assumes `r`, `g`, `b`, and `a` are in 0.0 - 1.0 range.
   Color blend(Color other, double amount) {
-    int blendedRed = (r + (other.r - r) * amount).round();
-    int blendedGreen = (g + (other.g - g) * amount).round();
-    int blendedBlue = (b + (other.b - b) * amount).round();
-    int blendedAlpha = (a + (other.a - a) * amount).round();
-
-    return Color.fromARGB(blendedAlpha, blendedRed, blendedGreen, blendedBlue);
+    double blendedR = r + (other.r - r) * amount;
+    double blendedG = g + (other.g - g) * amount;
+    double blendedB = b + (other.b - b) * amount;
+    double blendedA = a + (other.a - a) * amount;
+    return Color.from(alpha: blendedA, red: blendedR, green: blendedG, blue: blendedB);
   }
 
   /// Scale color attributes relatively to current ones.

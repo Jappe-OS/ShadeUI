@@ -324,10 +324,11 @@ class ShadeTheme {
           ),
         ),
       ),
-      listTileTheme: const ListTileThemeData(
+      listTileTheme: ListTileThemeData(
         dense: true,
-        mouseCursor: WidgetStatePropertyAll(buttonMouseCursor),
-        contentPadding: EdgeInsets.symmetric(horizontal: BPPresets.small, vertical: 0),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(BPPresets.small)),
+        mouseCursor: const WidgetStatePropertyAll(buttonMouseCursor),
+        contentPadding: const EdgeInsets.symmetric(horizontal: BPPresets.small, vertical: 0),
       ),
       textTheme: textTheme,
     );

@@ -20,6 +20,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:shade_ui/colors.dart';
+import 'package:shade_ui/extensions.dart';
 
 /// Controls the border style of a [ShadeContainer].
 enum ShadeContainerBorder {
@@ -91,8 +92,8 @@ class _AdvancedContainerState extends State<ShadeContainer> {
       ));
     }
 
-    final outerBorderColor = Colors.black.withValues(alpha: 0.7);
-    final innerBorderColor = Theme.of(context).colorScheme.onInverseSurface.blend(Colors.white, 0.3);
+    final outerBorderColor = Theme.of(context).colorScheme.isDark ? Colors.black.withValues(alpha: 0.75) : const Color.fromARGB(255, 123, 123, 123).withValues(alpha: 0.75);
+    final innerBorderColor = (Theme.of(context).colorScheme.isDark ? Theme.of(context).colorScheme.onInverseSurface : Colors.white).withValues(alpha: 0.75);
 
     // The container widget.
     Widget container() {
@@ -138,8 +139,8 @@ class _AdvancedContainerState extends State<ShadeContainer> {
             } else if (widget.border == ShadeContainerBorder.double) {
               return Border.all(
                 color: innerBorderColor,
-                width: 0.5,
-                strokeAlign: BorderSide.strokeAlignInside + 0.5,
+                width: 1.0,
+                strokeAlign: BorderSide.strokeAlignInside,
               );
             }
 

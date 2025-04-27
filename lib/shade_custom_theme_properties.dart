@@ -58,7 +58,11 @@ class ShadeCustomThemeProperties extends ChangeNotifier {
     notifyListeners();
   }
 
-  ShadeCustomThemeProperties(this._themeMode, this._primary, this._accentifyColors);
+  ShadeCustomThemeProperties({ThemeMode? themeMode, Color? primary, bool? accentifyColors}) {
+    _themeMode = themeMode;
+    _primary = primary;
+    _accentifyColors = accentifyColors;
+  }
 
-  factory ShadeCustomThemeProperties.setDefault() => ShadeCustomThemeProperties(null, null, null);
+  factory ShadeCustomThemeProperties.setDefault() => ShadeCustomThemeProperties();
 }

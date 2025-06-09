@@ -59,13 +59,15 @@ class ShadeTheme {
   /// the light themes.
   static ThemeData _buildTheme(ShadeCustomThemeProperties t, ColorScheme colorScheme) {
     // Style Constants
-
     const buttonMouseCursor = SystemMouseCursors.basic;
+
+    final textTheme = createTextTheme(colorScheme.onSurface);
 
     final commonButtonStyle = ButtonStyle(
       padding: const WidgetStatePropertyAll(kButtonPadding),
       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(kDefaultBorderRad))),
       mouseCursor: const WidgetStatePropertyAll(buttonMouseCursor),
+      textStyle: WidgetStatePropertyAll(textTheme.bodyLarge),
     );
 
     final menuStyle = MenuStyle(
@@ -90,7 +92,7 @@ class ShadeTheme {
 
     final inputDecorationTheme = () {
       return InputDecorationTheme(
-        contentPadding: const EdgeInsets.only(left: 12, right: 12, bottom: 8, top: 8),
+        contentPadding: null,
         constraints: const BoxConstraints(
           minHeight: kButtonHeight,
           maxHeight: kButtonHeight,
@@ -113,8 +115,6 @@ class ShadeTheme {
         ),
       );
     }();
-
-    final textTheme = createTextTheme(colorScheme.onSurface);
 
     return ThemeData.from(
       useMaterial3: true,
@@ -329,6 +329,8 @@ class ShadeTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(BPPresets.small)),
         mouseCursor: const WidgetStatePropertyAll(buttonMouseCursor),
         contentPadding: const EdgeInsets.symmetric(horizontal: BPPresets.small, vertical: 0),
+        selectedTileColor: colorScheme.primary.withValues(alpha: 0.08),
+        visualDensity: const VisualDensity(horizontal: -3, vertical: -3),
       ),
       textTheme: textTheme,
     );

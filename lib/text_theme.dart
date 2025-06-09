@@ -59,11 +59,41 @@ TextTheme createTextTheme(Color textColor) {
       textColor: textColor,
     ),
     titleSmall: _ShadeTextStyle(
-      fontSize: 14,
+      fontSize: 15,
       fontWeight: FontWeight.w500,
       textColor: textColor,
     ),
     bodyLarge: _ShadeTextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.normal,
+      textColor: textColor,
+    ),
+    bodyMedium: _ShadeTextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      textColor: textColor,
+    ),
+    bodySmall: _ShadeTextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.normal,
+      textColor: textColor,
+    ),
+    labelLarge: _ShadeTextStyle(
+      fontSize: 14,
+      fontWeight: FontWeight.w500,
+      textColor: textColor,
+    ),
+    labelMedium: _ShadeTextStyle(
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      textColor: textColor,
+    ),
+    labelSmall: _ShadeTextStyle(
+      fontSize: 10,
+      fontWeight: FontWeight.normal,
+      textColor: textColor,
+    ),
+    /*bodyLarge: _ShadeTextStyle(
       fontSize: 16,
       fontWeight: FontWeight.normal,
       textColor: textColor,
@@ -92,7 +122,7 @@ TextTheme createTextTheme(Color textColor) {
       fontSize: 10,
       fontWeight: FontWeight.normal,
       textColor: textColor,
-    ),
+    ),*/
   );
 }
 

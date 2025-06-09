@@ -61,6 +61,9 @@ class _ShadeEditableTextWidgetState extends State<ShadeEditableTextWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final enabledBorder = Theme.of(context).inputDecorationTheme.enabledBorder;
+    final border = Theme.of(context).inputDecorationTheme.border;
+
     return MouseRegion(
       onEnter: (p0) => setState(() => isHovered = true),
       onExit: (p0) => setState(() => isHovered = false),
@@ -72,8 +75,8 @@ class _ShadeEditableTextWidgetState extends State<ShadeEditableTextWidget> {
         decoration: InputDecoration(
           hintText: widget.hintText,
           filled: focus.hasFocus,
-          enabledBorder: isHovered || focus.hasFocus ? Theme.of(context).inputDecorationTheme.enabledBorder : InputBorder.none,
-          border: isHovered || focus.hasFocus ? Theme.of(context).inputDecorationTheme.border : InputBorder.none,
+          enabledBorder: isHovered || focus.hasFocus ? enabledBorder : enabledBorder!.copyWith(borderSide: const BorderSide(color: Colors.transparent)),
+          border: isHovered || focus.hasFocus ? border : border!.copyWith(borderSide: const BorderSide(color: Colors.transparent)),
         ),
       ),
     );

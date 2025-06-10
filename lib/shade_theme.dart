@@ -67,7 +67,6 @@ class ShadeTheme {
       padding: const WidgetStatePropertyAll(kButtonPadding),
       shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(kDefaultBorderRad))),
       mouseCursor: const WidgetStatePropertyAll(buttonMouseCursor),
-      textStyle: WidgetStatePropertyAll(textTheme.bodyLarge),
     );
 
     final menuStyle = MenuStyle(
@@ -166,6 +165,7 @@ class ShadeTheme {
           enabledMouseCursor: buttonMouseCursor,
           minimumSize: const Size(kButtonHeight, kButtonHeight),
           maximumSize: const Size(double.infinity, kButtonHeight),
+          iconSize: kCompactIconSize,
         ),
       ),
 

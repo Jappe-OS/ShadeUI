@@ -38,13 +38,13 @@ enum _ShadeContainerBackgroundType {
 /// A container widget that makes it easier to craft UI.
 class ShadeContainer extends StatefulWidget {
   /// Contructs a solid container without any transparency. The default color is [Theme.of(context).colorScheme.surface].
-  factory ShadeContainer.solid({Widget? child, double? width, double? height, EdgeInsets? padding, Color? backgroundColor, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
+  factory ShadeContainer.solid({Widget? child, double? width, double? height, EdgeInsetsGeometry? padding, Color? backgroundColor, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
     final newBackgroundColor = backgroundColor?.withValues(alpha: 1);
     return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundType: _ShadeContainerBackgroundType.solid, border: border, borderRadius: borderRadius, shadows: shadows, child: child);
   }
 
   /// Contructs a transparent container, optionally with blur. The default color is [Theme.of(context).colorScheme.surface.transparentVersion()].
-  factory ShadeContainer.transparent({Widget? child, double? width, double? height, EdgeInsets? padding, Color? backgroundColor, bool backgroundBlur = false, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
+  factory ShadeContainer.transparent({Widget? child, double? width, double? height, EdgeInsetsGeometry? padding, Color? backgroundColor, bool backgroundBlur = false, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
     final newBackgroundColor = backgroundColor?.transparentVersion();
     return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundBlur: backgroundBlur, backgroundType: _ShadeContainerBackgroundType.transparent, border: border, borderRadius: borderRadius, shadows: shadows, child: child);
   }
@@ -64,7 +64,7 @@ class ShadeContainer extends StatefulWidget {
   final Widget? child;
   final double? width;
   final double? height;
-  final EdgeInsets? padding;
+  final EdgeInsetsGeometry? padding;
   final Color? backgroundColor;
   final bool backgroundBlur;
   final _ShadeContainerBackgroundType backgroundType;

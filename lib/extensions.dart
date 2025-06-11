@@ -25,5 +25,5 @@ extension ShadeUIColorSchemeExtension on ColorScheme {
 }
 
 extension ShadeUITextStyleExtension on TextStyle {
-  Color? dim() => color?.withValues(alpha: 0.6);
+  TextStyle dim() => copyWith(color: color?.withValues(alpha: 0.6));
 }

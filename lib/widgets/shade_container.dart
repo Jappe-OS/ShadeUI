@@ -92,8 +92,9 @@ class _AdvancedContainerState extends State<ShadeContainer> {
       ));
     }
 
-    final outerBorderColor = Theme.of(context).colorScheme.isDark ? Colors.black.withValues(alpha: 0.75) : const Color.fromARGB(255, 123, 123, 123).withValues(alpha: 0.75);
-    final innerBorderColor = (Theme.of(context).colorScheme.isDark ? Theme.of(context).colorScheme.onInverseSurface : Colors.white).withValues(alpha: 0.75);
+    final theme = Theme.of(context);
+    final outerBorderColor = theme.colorScheme.isDark ? Colors.black.withValues(alpha: 0.75) : const Color.fromARGB(255, 123, 123, 123).withValues(alpha: 0.75);
+    final innerBorderColor = (theme.colorScheme.isDark ? theme.colorScheme.onInverseSurface : Colors.white).withValues(alpha: 0.75);
 
     // The container widget.
     Widget container() {
@@ -122,9 +123,11 @@ class _AdvancedContainerState extends State<ShadeContainer> {
             if (widget.backgroundColor == null) {
               switch (widget.backgroundType) {
                 case _ShadeContainerBackgroundType.solid:
-                  return Theme.of(context).colorScheme.surface;
+                  return theme.colorScheme.surface;
                 case _ShadeContainerBackgroundType.transparent:
-                  return Theme.of(context).colorScheme.surface.transparentVersion();
+                  return (theme.colorScheme.isDark ? Colors.black : Colors.white/*, 0.75*/)
+                    .blend(theme.colorScheme.primaryContainer, 0.1)
+                    .transparentVersion();
               }
             }
 
@@ -135,7 +138,7 @@ class _AdvancedContainerState extends State<ShadeContainer> {
           borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : null,
           border: () {
             if (widget.border == ShadeContainerBorder.single) {
-              return Border.all(color: Theme.of(context).dividerColor, width: 1.0, strokeAlign: BorderSide.strokeAlignInside);
+              return Border.all(color: theme.dividerColor, width: 1.0, strokeAlign: BorderSide.strokeAlignInside);
             } else if (widget.border == ShadeContainerBorder.double) {
               return Border.all(
                 color: innerBorderColor,

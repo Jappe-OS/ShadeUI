@@ -23,3 +23,7 @@ extension ShadeUIColorSchemeExtension on ColorScheme {
   /// Whether the brightness is light.
   bool get isLight => brightness == Brightness.light;
 }
+
+extension ShadeUITextStyleExtension on TextStyle {
+  Color? dim() => color?.withValues(alpha: 0.6);
+}

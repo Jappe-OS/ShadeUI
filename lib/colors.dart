@@ -234,6 +234,9 @@ extension ShadeUIColorExtension on Color {
         .withSaturation(hslColor.lightness == 0.0 ? 0.0 : hslColor.saturation);
   }
 
+  /// Returns a dimmed version of the color. Suitable for text and icons.
+  Color dim() => withValues(alpha: 0.6);
+
   /// Returns a hex representation (`#AARRGGBB`) of the color.
   String toHex() {
     return '#${a.toHex()}${r.toHex()}${g.toHex()}${b.toHex()}';

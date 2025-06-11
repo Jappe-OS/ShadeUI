@@ -15,6 +15,7 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import 'package:flutter/material.dart';
+import 'package:shade_ui/colors.dart';
 
 extension ShadeUIColorSchemeExtension on ColorScheme {
   /// Whether the brightness is dark.
@@ -25,5 +26,6 @@ extension ShadeUIColorSchemeExtension on ColorScheme {
 }
 
 extension ShadeUITextStyleExtension on TextStyle {
-  TextStyle dim() => copyWith(color: color?.withValues(alpha: 0.6));
+  /// Returns a dimmed version of the color of the [TextStyle].
+  TextStyle dim() => copyWith(color: color?.dim());
 }

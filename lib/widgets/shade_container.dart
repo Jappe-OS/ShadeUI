@@ -116,7 +116,7 @@ class _AdvancedContainerState extends State<ShadeContainer> {
             fit: BoxFit.none,
             repeat: ImageRepeat.repeat,
             scale: 7,
-            opacity: 0.038,
+            opacity: 0.1,
           ) : null,
           color: () {
             if (widget.backgroundColor == null) {

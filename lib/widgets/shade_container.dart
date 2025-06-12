@@ -93,8 +93,12 @@ class _AdvancedContainerState extends State<ShadeContainer> {
     }
 
     final theme = Theme.of(context);
+
     final outerBorderColor = theme.colorScheme.isDark ? Colors.black.withValues(alpha: 0.75) : const Color.fromARGB(255, 123, 123, 123).withValues(alpha: 0.75);
-    final innerBorderColor = (theme.colorScheme.isDark ? theme.colorScheme.onInverseSurface : Colors.white).withValues(alpha: 0.75);
+
+    final innerBorderColor = (theme.colorScheme.isDark ? theme.colorScheme.outline : Colors.white).withValues(alpha: 0.75);
+    final innerBorder = BorderSide(color: innerBorderColor, width: 1, strokeAlign: BorderSide.strokeAlignInside);
+    final innerBorderTop = BorderSide(color: innerBorderColor, width: 1.5, strokeAlign: BorderSide.strokeAlignInside);
 
     // The container widget.
     Widget container() {
@@ -104,7 +108,7 @@ class _AdvancedContainerState extends State<ShadeContainer> {
         decoration: BoxDecoration(
           border: widget.border == ShadeContainerBorder.double ? Border.all(
             color: outerBorderColor,
-            width: 1.0,
+            width: 1.25,
             strokeAlign: BorderSide.strokeAlignOutside,
           ) : null,
           borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : null,
@@ -140,10 +144,11 @@ class _AdvancedContainerState extends State<ShadeContainer> {
             if (widget.border == ShadeContainerBorder.single) {
               return Border.all(color: theme.dividerColor, width: 1.0, strokeAlign: BorderSide.strokeAlignInside);
             } else if (widget.border == ShadeContainerBorder.double) {
-              return Border.all(
-                color: innerBorderColor,
-                width: 1.0,
-                strokeAlign: BorderSide.strokeAlignInside,
+              return Border(
+                top: innerBorderTop,
+                left: innerBorder,
+                bottom: innerBorder,
+                right: innerBorder,
               );
             }
 

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'border_padding_presets.dart';
+
 const kTransparentVerOp = 0.85;
-const kDefaultBorderRad = 7.0;
+const kDefaultBorderRad = BPPresets.small;
 const kButtonHeight = 32.0;
 const kButtonPaddingHoriz = 20.0;
 const kButtonPaddingVert = kButtonHeight / 2.25806452;

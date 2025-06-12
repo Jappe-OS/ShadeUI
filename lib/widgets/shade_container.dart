@@ -145,17 +145,21 @@ class _AdvancedContainerState extends State<ShadeContainer> {
       );
     }
 
+    // Additional padding needed to display outher border.
+    final additionalPaddingForClipRRect = widget.border == ShadeContainerBorder.double ? 1.0 : 0.0;
+    final outerBorderRadius = widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius! + additionalPaddingForClipRRect) : BorderRadius.zero;
+
     // Return the container() differently depending on blur.
     return PhysicalModel(
       color: Colors.transparent,
       shadowColor: Colors.black,
       elevation: widget.elevation,
-      borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : BorderRadius.zero,
+      borderRadius: outerBorderRadius,
       child: widget.backgroundBlur ? ClipRRect(
-        borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : BorderRadius.zero,
+        borderRadius: outerBorderRadius,
         child: BackdropFilter(
           filter: ImageFilter.blur(sigmaX: 13.0, sigmaY: 13.0, tileMode: TileMode.repeated),
-          child: container(),
+          child: Padding(padding: EdgeInsets.all(additionalPaddingForClipRRect), child: container()),
         ),
       ) : container(),
     );

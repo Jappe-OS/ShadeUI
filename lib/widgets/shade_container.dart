@@ -79,19 +79,6 @@ class ShadeContainer extends StatefulWidget {
 class _AdvancedContainerState extends State<ShadeContainer> {
   @override
   Widget build(BuildContext context) {
-    List<BoxShadow> shadows = [];
-
-    // Configure shadows.
-    for (var shadow in widget.shadows) {
-      shadows.add(BoxShadow(
-        color: shadow.color,
-        offset: shadow.offset,
-        blurRadius: shadow.blurRadius,
-        spreadRadius: shadow.spreadRadius,
-        blurStyle: BlurStyle.outer,
-      ));
-    }
-
     final theme = Theme.of(context);
 
     final outerBorderColor = theme.colorScheme.isDark ? Colors.black.withValues(alpha: 0.75) : const Color.fromARGB(255, 123, 123, 123).withValues(alpha: 0.75);
@@ -112,7 +99,7 @@ class _AdvancedContainerState extends State<ShadeContainer> {
             strokeAlign: BorderSide.strokeAlignOutside,
           ) : null,
           borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : null,
-          boxShadow: shadows,
+          boxShadow: widget.shadows,
           image: widget.backgroundBlur ? const DecorationImage(
             image: AssetImage(
               "resources/images/blur_noise.png",

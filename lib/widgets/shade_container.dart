@@ -38,15 +38,15 @@ enum _ShadeContainerBackgroundType {
 /// A container widget that makes it easier to craft UI.
 class ShadeContainer extends StatefulWidget {
   /// Contructs a solid container without any transparency. The default color is [Theme.of(context).colorScheme.surface].
-  factory ShadeContainer.solid({Widget? child, double? width, double? height, EdgeInsetsGeometry? padding, Color? backgroundColor, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
+  factory ShadeContainer.solid({Widget? child, double? width, double? height, EdgeInsetsGeometry? padding, Color? backgroundColor, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, double elevation = 0}) {
     final newBackgroundColor = backgroundColor?.withValues(alpha: 1);
-    return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundType: _ShadeContainerBackgroundType.solid, border: border, borderRadius: borderRadius, shadows: shadows, child: child);
+    return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundType: _ShadeContainerBackgroundType.solid, border: border, borderRadius: borderRadius, elevation: elevation, child: child);
   }
 
   /// Contructs a transparent container, optionally with blur. The default color is [Theme.of(context).colorScheme.surface.transparentVersion()].
-  factory ShadeContainer.transparent({Widget? child, double? width, double? height, EdgeInsetsGeometry? padding, Color? backgroundColor, bool backgroundBlur = false, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, List<BoxShadow> shadows = const []}) {
+  factory ShadeContainer.transparent({Widget? child, double? width, double? height, EdgeInsetsGeometry? padding, Color? backgroundColor, bool backgroundBlur = false, ShadeContainerBorder border = ShadeContainerBorder.none, double? borderRadius, double elevation = 0}) {
     final newBackgroundColor = backgroundColor?.transparentVersion();
-    return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundBlur: backgroundBlur, backgroundType: _ShadeContainerBackgroundType.transparent, border: border, borderRadius: borderRadius, shadows: shadows, child: child);
+    return ShadeContainer._(width: width, height: height, padding: padding, backgroundColor: newBackgroundColor, backgroundBlur: backgroundBlur, backgroundType: _ShadeContainerBackgroundType.transparent, border: border, borderRadius: borderRadius, elevation: elevation, child: child);
   }
 
   const ShadeContainer._({
@@ -59,7 +59,7 @@ class ShadeContainer extends StatefulWidget {
     required this.backgroundType,
     required this.border,
     this.borderRadius,
-    this.shadows = const []});
+    this.elevation = 0});
 
   final Widget? child;
   final double? width;
@@ -70,7 +70,7 @@ class ShadeContainer extends StatefulWidget {
   final _ShadeContainerBackgroundType backgroundType;
   final ShadeContainerBorder border;
   final double? borderRadius;
-  final List<BoxShadow> shadows;
+  final double elevation;
 
   @override
   _AdvancedContainerState createState() => _AdvancedContainerState();
@@ -99,7 +99,6 @@ class _AdvancedContainerState extends State<ShadeContainer> {
             strokeAlign: BorderSide.strokeAlignOutside,
           ) : null,
           borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : null,
-          boxShadow: widget.shadows,
           image: widget.backgroundBlur ? const DecorationImage(
             image: AssetImage(
               "resources/images/blur_noise.png",
@@ -146,16 +145,19 @@ class _AdvancedContainerState extends State<ShadeContainer> {
       );
     }
 
-    // Additional padding needed to display outher border.
-    final additionalPaddingForClipRRect = widget.border == ShadeContainerBorder.double ? 1.0 : 0.0;
-
     // Return the container() differently depending on blur.
-    return widget.backgroundBlur ? ClipRRect(
-      borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius! + additionalPaddingForClipRRect) : BorderRadius.zero,
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 13.0, sigmaY: 13.0, tileMode: TileMode.repeated),
-        child: Padding(padding: EdgeInsets.all(additionalPaddingForClipRRect), child: container()),
-      ),
-    ) : container();
+    return PhysicalModel(
+      color: Colors.transparent,
+      shadowColor: Colors.black,
+      elevation: widget.elevation,
+      borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : BorderRadius.zero,
+      child: widget.backgroundBlur ? ClipRRect(
+        borderRadius: widget.borderRadius != null ? BorderRadius.circular(widget.borderRadius!) : BorderRadius.zero,
+        child: BackdropFilter(
+          filter: ImageFilter.blur(sigmaX: 13.0, sigmaY: 13.0, tileMode: TileMode.repeated),
+          child: container(),
+        ),
+      ) : container(),
+    );
   }
 }

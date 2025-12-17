@@ -1,4 +1,8 @@
 # Shade UI
+
+> [!WARNING]
+> This package has been deprecated in favour of https://github.com/JappeOS/shadcn_flutter
+
 A UI system used by JappeOS apps. Works alongside material widgets.
 
 ## How to use
@@ -49,3 +53,4 @@ Important resources:
 * [Main organization page](https://github.com/Jappe-OS/)
 * [Shade UI](https://github.com/Jappe-OS/shade_ui)
 * [Shade UI Issues](https://github.com/Jappe-OS/shade_ui/issues)
+
